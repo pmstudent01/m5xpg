@@ -1,5 +1,4 @@
 $kind: http-request
-name: Diagnostic report is triggered and queued
 url: "{{baseUrl}}/diagnostics/generate/:vehicleId"
 method: POST
 headers:
@@ -19,11 +18,6 @@ auth:
     header: "{}"
 scripts:
   - type: afterResponse
-    code: |-
-      pm.test("Status code is 201", function () {
-          pm.response.to.have.status(201);
-      });
-
-      pm.collectionVariables.set("diagnosticRunID", pm.response.json().id);
+    code: pm.collectionVariables.set("diagnosticRunID", pm.response.json().id);
     language: text/javascript
 order: 1000

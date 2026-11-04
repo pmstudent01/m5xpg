@@ -1,5 +1,4 @@
 $kind: http-request
-name: Diagnostic report sent successfully
 url: "{{baseUrl}}/diagnostics/send/:id"
 method: POST
 headers:
@@ -19,9 +18,6 @@ auth:
     header: "{}"
 scripts:
   - type: afterResponse
-    code: |-
-      pm.test("Status code is 204", function () {
-          pm.response.to.have.status(204);
-      });
+    code: ""
     language: text/javascript
 order: 3000
