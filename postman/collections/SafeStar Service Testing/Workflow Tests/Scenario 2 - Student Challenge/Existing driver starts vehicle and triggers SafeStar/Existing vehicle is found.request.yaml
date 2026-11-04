@@ -1,5 +1,4 @@
 $kind: http-request
-name: Existing vehicle is found
 url: "{{baseUrl}}/vehicle/:id"
 method: GET
 pathVariables:
@@ -18,8 +17,11 @@ auth:
 scripts:
   - type: afterResponse
     code: |-
-      pm.test("Status code is 200", function () {
-          pm.response.to.have.status(200);
-      });
+      const qaWorkshopPackage = pm.require('@postvehicle-enterprise-team-d29a54ad-ac82-48fc-9af7-d4774bd6/qa_workshop_package');
+
+      qaWorkshopPackage.isValidVIN(pm.response.json().vin);
     language: text/javascript
+    packages:
+      "@postvehicle-enterprise-team-d29a54ad-ac82-48fc-9af7-d4774bd6/qa_workshop_package":
+        id: 01a1a5d4-e74c-7690-b125-a4d9f03067cf
 order: 2000
